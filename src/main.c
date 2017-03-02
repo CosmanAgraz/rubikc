@@ -34,11 +34,13 @@ int main(int argc, char* argv[]){
         printf("%9s[%d][%d][%d]\n", empty, cubePiece[3][0], cubePiece[3][1], cubePiece[3][2]);
         printf("%9s[%d][Y][%d]\n", empty, cubePiece[3][3], cubePiece[3][4]);
         printf("%9s[%d][%d][%d]\n", empty, cubePiece[3][5], cubePiece[3][6], cubePiece[3][7]);
-
+	
+	//printf("suh dude \n");
 	//Dealocating memory to avoid memory leaks
 	for (int i=0; i < face; i++){
 		free(cubePiece[i]);
+		printf("%d\n", i);
 	}
-	free(cubePiece);
+	//free(cubePiece);
 	return 0;
 }
