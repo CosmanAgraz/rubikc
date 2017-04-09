@@ -40,6 +40,41 @@ void whiteCCW(int** cube){
         cube[2][2] = temp;
 }
 
+void whiteCW(int** cube){
+        //modifies white face pieces
+        int temp;
+        temp = cube[0][0];
+        cube[0][0] = cube[0][5];
+        cube[0][5] = cube[0][7];
+        cube[0][7] = cube[0][2];
+        cube[0][2] = temp;
+
+        temp = cube[0][1];
+        cube[0][1] = cube[0][3];
+        cube[0][3] = cube[0][6];
+        cube[0][6] = cube[0][4];
+        cube[0][4] = temp;
+
+        //modifies the pieces around the white face
+        temp = cube[1][0];
+        cube[1][0] = cube[2][0];
+        cube[2][0] = cube[4][0];
+        cube[4][0] = cube[5][0];
+        cube[5][0] = temp;
+
+        temp = cube[1][1];
+        cube[1][1] = cube[2][1];
+        cube[2][1] = cube[4][1];
+        cube[4][1] = cube[5][1];
+        cube[5][1] = temp;
+
+        temp = cube[1][2];
+        cube[1][2] = cube[2][2];
+        cube[2][2] = cube[4][2];
+        cube[4][2] = cube[5][2];
+        cube[5][2] = temp;
+}
+
 void greenCCW(int** cube){
 	//rotate green face
 	int temp;
@@ -59,8 +94,8 @@ void greenCCW(int** cube){
 	temp = cube[0][0];
         cube[0][0] = cube[2][0];
         cube[2][0] = cube[3][0];
-        cube[3][0] = cube[5][2];
-        cube[5][2] = temp;
+        cube[3][0] = cube[5][7];
+        cube[5][7] = temp;
 
         temp = cube[0][3];
         cube[0][3] = cube[2][3];
@@ -71,8 +106,43 @@ void greenCCW(int** cube){
         temp = cube[0][5];
         cube[0][5] = cube[2][5];
         cube[2][5] = cube[3][5];
-        cube[3][5] = cube[5][7];
-        cube[5][7] = temp;
+        cube[3][5] = cube[5][2];
+        cube[5][2] = temp;
+}
+
+void greenCW(int** cube){
+        //modifies green face pieces
+        int temp;
+        temp = cube[1][0];
+        cube[1][0] = cube[1][5];
+        cube[1][5] = cube[1][7];
+        cube[1][7] = cube[1][2];
+        cube[1][2] = temp;
+
+        temp = cube[1][1];
+        cube[1][1] = cube[1][3];
+        cube[1][3] = cube[1][6];
+        cube[1][6] = cube[1][4];
+        cube[1][4] = temp;
+
+        //modifies the pieces around the green face
+        temp = cube[0][0];
+        cube[0][0] = cube[5][7];
+        cube[5][7] = cube[3][0];
+        cube[3][0] = cube[2][0];
+        cube[2][0] = temp;
+
+        temp = cube[0][3];
+        cube[0][3] = cube[5][4];
+        cube[5][4] = cube[3][3];
+        cube[3][3] = cube[2][3];
+        cube[2][3] = temp;
+
+        temp = cube[0][5];
+        cube[0][5] = cube[5][2];
+        cube[5][2] = cube[3][5];
+        cube[3][5] = cube[2][5];
+        cube[2][5] = temp;
 }
 
 void redCCW(int** cube){
@@ -106,9 +176,43 @@ void redCCW(int** cube){
         temp = cube[0][7];
         cube[0][7] = cube[4][5];
         cube[4][5] = cube[3][0];
-        cube[3][0] = cube[2][2];
+        cube[3][0] = cube[1][2];
+        cube[1][2] = temp;
+}
+
+void redCW(int** cube){
+        //modifies red face pieces
+        int temp;
+        temp = cube[2][0];
+        cube[2][0] = cube[2][5];
+        cube[2][5] = cube[2][7];
+        cube[2][7] = cube[2][2];
         cube[2][2] = temp;
 
+        temp = cube[2][1];
+        cube[2][1] = cube[2][3];
+        cube[2][3] = cube[2][6];
+        cube[2][6] = cube[2][4];
+        cube[2][4] = temp;
+
+        //modifies the pieces around the red face
+        temp = cube[0][5];
+        cube[0][5] = cube[1][7];
+        cube[1][7] = cube[3][2];
+        cube[3][2] = cube[4][0];
+        cube[4][0] = temp;
+
+        temp = cube[0][6];
+        cube[0][6] = cube[1][4];
+        cube[1][4] = cube[3][1];
+        cube[3][1] = cube[4][3];
+        cube[4][3] = temp;
+
+        temp = cube[0][7];
+        cube[0][7] = cube[1][2];
+        cube[1][2] = cube[3][0];
+        cube[3][0] = cube[4][5];
+        cube[4][5] = temp;
 }
 
 void yellowCCW(int** cube){
@@ -144,7 +248,41 @@ void yellowCCW(int** cube){
         cube[2][7] = cube[4][7];
         cube[4][7] = cube[5][7];
         cube[5][7] = temp;
+}
 
+void yellowCW(int** cube){
+        //modifies yellow face pieces
+        int temp;
+        temp = cube[3][0];
+        cube[3][0] = cube[3][5];
+        cube[3][5] = cube[3][7];
+        cube[3][7] = cube[3][2];
+        cube[3][2] = temp;
+
+        temp = cube[3][1];
+        cube[3][1] = cube[3][3];
+        cube[3][3] = cube[3][6];
+        cube[3][6] = cube[3][4];
+        cube[3][4] = temp;
+
+        //mods the pieces around yellow face
+        temp = cube[2][5];
+        cube[2][5] = cube[1][5];
+        cube[1][5] = cube[5][5];
+        cube[5][5] = cube[4][5];
+        cube[4][5] = temp;
+
+        temp = cube[2][6];
+        cube[2][6] = cube[1][6];
+        cube[1][6] = cube[5][6];
+        cube[5][6] = cube[4][6];
+        cube[4][6] = temp;
+
+        temp = cube[2][7];
+        cube[2][7] = cube[1][7];
+        cube[1][7] = cube[5][7];
+        cube[5][7] = cube[4][7];
+        cube[4][7] = temp;
 }
 
 void blueCCW(int** cube){
@@ -162,7 +300,7 @@ void blueCCW(int** cube){
         cube[4][6] = cube[4][3];
         cube[4][3] = temp;
 	
-	//mods the pieces around green face
+	//mods the pieces around blue face
         temp = cube[0][7];
         cube[0][7] = cube[5][0];
         cube[5][0] = cube[3][7];
@@ -182,6 +320,41 @@ void blueCCW(int** cube){
         cube[2][2] = temp;
 }
 
+void blueCW(int** cube){
+        //modifies blue face pieces
+        int temp;
+        temp = cube[4][0];
+        cube[4][0] = cube[4][5];
+        cube[4][5] = cube[4][7];
+        cube[4][7] = cube[4][2];
+        cube[4][2] = temp;
+
+        temp = cube[4][1];
+        cube[4][1] = cube[4][3];
+        cube[4][3] = cube[4][6];
+        cube[4][6] = cube[4][4];
+        cube[4][4] = temp;
+
+        //mods the pieces around blue face
+        temp = cube[0][7];
+        cube[0][7] = cube[2][7];
+        cube[2][7] = cube[3][7];
+        cube[3][7] = cube[5][0];
+        cube[5][0] = temp;
+
+        temp = cube[0][4];
+        cube[0][4] = cube[2][4];
+        cube[2][4] = cube[3][4];
+        cube[3][4] = cube[5][3];
+        cube[5][3] = temp;
+
+        temp = cube[0][2];
+        cube[0][2] = cube[2][2];
+        cube[2][2] = cube[3][2];
+        cube[3][2] = cube[5][5];
+        cube[5][5] = temp;
+}
+
 void orangeCCW(int** cube){
 	//rotates orange face
         int temp;
@@ -199,23 +372,57 @@ void orangeCCW(int** cube){
 
         //mods the pieces around orange face
         temp = cube[0][2];
-        cube[0][2] = cube[2][0];
-        cube[2][0] = cube[3][5];
+        cube[0][2] = cube[1][0];
+        cube[1][0] = cube[3][5];
         cube[3][5] = cube[4][7];
         cube[4][7] = temp;
 
         temp = cube[0][1];
-        cube[0][1] = cube[2][3];
-        cube[2][3] = cube[3][6];
+        cube[0][1] = cube[1][3];
+        cube[1][3] = cube[3][6];
         cube[3][6] = cube[4][4];
         cube[4][4] = temp;
 
         temp = cube[0][0];
-        cube[0][0] = cube[2][5];
-        cube[2][5] = cube[3][7];
+        cube[0][0] = cube[1][5];
+        cube[1][5] = cube[3][7];
         cube[3][7] = cube[4][2];
         cube[4][2] = temp;
+}
 
+void orangeCW(int** cube){
+        //modifies orange face pieces
+        int temp;
+        temp = cube[5][0];
+        cube[5][0] = cube[5][5];
+        cube[5][5] = cube[5][7];
+        cube[5][7] = cube[5][2];
+        cube[5][2] = temp;
+
+        temp = cube[5][1];
+        cube[5][1] = cube[5][3];
+        cube[5][3] = cube[5][6];
+        cube[5][6] = cube[5][4];
+        cube[5][4] = temp;
+
+        //mods the pieces around orange face
+        temp = cube[0][2];
+        cube[0][2] = cube[4][7];
+        cube[4][7] = cube[3][5];
+        cube[3][5] = cube[1][0];
+        cube[1][0] = temp;
+
+        temp = cube[0][1];
+        cube[0][1] = cube[4][4];
+        cube[4][4] = cube[3][6];
+        cube[3][6] = cube[1][3];
+        cube[1][3] = temp;
+
+        temp = cube[0][0];
+        cube[0][0] = cube[4][2];
+        cube[4][2] = cube[3][7];
+        cube[3][7] = cube[1][5];
+        cube[1][5] = temp;
 }
 
 //Show me what the cube looks like
@@ -250,28 +457,33 @@ void testRuns(int** cube){
         
         printf("rotate white face\n");
         whiteCCW(cube);
+        whiteCW(cube);
         displayCube(cube);
-        resetCube(cube);
 
-        printf("rotate greenCCW face\n");
+        printf("rotate green face\n");
         greenCCW(cube);
+        greenCW(cube);
         displayCube(cube);
-        resetCube(cube);
 
         printf("rotate red face\n");
         redCCW(cube);
+        redCW(cube);
         displayCube(cube);
-        resetCube(cube);
+
+        printf("rotate yellow face\n");
+        yellowCCW(cube);
+        yellowCW(cube);
+        displayCube(cube);
 
         printf("rotate blue face\n");
         blueCCW(cube);
+        blueCW(cube);
         displayCube(cube);
-        resetCube(cube);
 
         printf("rotate orange face\n");
         orangeCCW(cube);
+        orangeCW(cube);
         displayCube(cube);
-        resetCube(cube);
 }
 
 int main(int argc, char* argv[]){
