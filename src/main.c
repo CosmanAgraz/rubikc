@@ -2,12 +2,280 @@
 #include<stdlib.h>
 
 //global memory
-int face = 6, facePiece = 8, i, j, count;
+int face = 6, facePiece = 8, i, j, count, temp;
 char *empty = "";
 
+//master function
+int rotate(int** cube, int side, int rotation){
+        if (0<=side<=5 && 0<=rotation<=1){
+                if (rotation==0){
+                        //rotates face pieces CCW
+                        temp = cube[side][0];
+                        cube[side][0] = cube[side][2];
+                        cube[side][2] = cube[side][7];
+                        cube[side][7] = cube[side][5];
+                        cube[side][5] = temp;
+
+                        temp = cube[side][1];
+                        cube[side][1] = cube[side][4];
+                        cube[side][4] = cube[side][6];
+                        cube[side][6] = cube[side][3];
+                        cube[side][3] = temp;
+
+                        switch(side){
+                                case 0: //white
+                                        temp = cube[1][0];
+                                        cube[1][0] = cube[5][0];
+                                        cube[5][0] = cube[4][0];
+                                        cube[4][0] = cube[2][0];
+                                        cube[2][0] = temp;
+
+                                        temp = cube[1][1];
+                                        cube[1][1] = cube[5][1];
+                                        cube[5][1] = cube[4][1];
+                                        cube[4][1] = cube[2][1];
+                                        cube[2][1] = temp;
+
+                                        temp = cube[1][2];
+                                        cube[1][2] = cube[5][2];
+                                        cube[5][2] = cube[4][2];
+                                        cube[4][2] = cube[2][2];
+                                        cube[2][2] = temp;
+                                        break;
+                                case 1: //green
+                                        temp = cube[0][0];
+                                        cube[0][0] = cube[2][0];
+                                        cube[2][0] = cube[3][0];
+                                        cube[3][0] = cube[5][7];
+                                        cube[5][7] = temp;
+
+                                        temp = cube[0][3];
+                                        cube[0][3] = cube[2][3];
+                                        cube[2][3] = cube[3][3];
+                                        cube[3][3] = cube[5][4];
+                                        cube[5][4] = temp;
+
+                                        temp = cube[0][5];
+                                        cube[0][5] = cube[2][5];
+                                        cube[2][5] = cube[3][5];
+                                        cube[3][5] = cube[5][2];
+                                        cube[5][2] = temp;
+                                        break;
+                                case 2: //red
+                                        temp = cube[0][5];
+                                        cube[0][5] = cube[4][0];
+                                        cube[4][0] = cube[3][2];
+                                        cube[3][2] = cube[1][7];
+                                        cube[1][7] = temp;
+
+                                        temp = cube[0][6];
+                                        cube[0][6] = cube[4][3];
+                                        cube[4][3] = cube[3][1];
+                                        cube[3][1] = cube[1][4];
+                                        cube[1][4] = temp;
+
+                                        temp = cube[0][7];
+                                        cube[0][7] = cube[4][5];
+                                        cube[4][5] = cube[3][0];
+                                        cube[3][0] = cube[1][2];
+                                        cube[1][2] = temp;
+                                        break;
+                                case 3: //yellow
+                                        temp = cube[1][5];
+                                        cube[1][5] = cube[2][5];
+                                        cube[2][5] = cube[4][5];
+                                        cube[4][5] = cube[5][5];
+                                        cube[5][5] = temp;
+
+                                        temp = cube[1][6];
+                                        cube[1][6] = cube[2][6];
+                                        cube[2][6] = cube[4][6];
+                                        cube[4][6] = cube[5][6];
+                                        cube[5][6] = temp;
+
+                                        temp = cube[1][7];
+                                        cube[1][7] = cube[2][7];
+                                        cube[2][7] = cube[4][7];
+                                        cube[4][7] = cube[5][7];
+                                        cube[5][7] = temp;
+                                        break;
+                                case 4: //blue
+                                        temp = cube[0][7];
+                                        cube[0][7] = cube[5][0];
+                                        cube[5][0] = cube[3][7];
+                                        cube[3][7] = cube[2][7];
+                                        cube[2][7] = temp;
+
+                                        temp = cube[0][4];
+                                        cube[0][4] = cube[5][3];
+                                        cube[5][3] = cube[3][4];
+                                        cube[3][4] = cube[2][4];
+                                        cube[2][4] = temp;
+
+                                        temp = cube[0][2];
+                                        cube[0][2] = cube[5][5];
+                                        cube[5][5] = cube[3][2];
+                                        cube[3][2] = cube[2][2];
+                                        cube[2][2] = temp;
+                                        break;
+                                case 5: //orange
+                                        temp = cube[0][2];
+                                        cube[0][2] = cube[1][0];
+                                        cube[1][0] = cube[3][5];
+                                        cube[3][5] = cube[4][7];
+                                        cube[4][7] = temp;
+
+                                        temp = cube[0][1];
+                                        cube[0][1] = cube[1][3];
+                                        cube[1][3] = cube[3][6];
+                                        cube[3][6] = cube[4][4];
+                                        cube[4][4] = temp;
+
+                                        temp = cube[0][0];
+                                        cube[0][0] = cube[1][5];
+                                        cube[1][5] = cube[3][7];
+                                        cube[3][7] = cube[4][2];
+                                        cube[4][2] = temp;
+                                        break;
+                        }
+                } else {
+                        //rotates face pieces CW
+                        temp = cube[side][0];
+                        cube[side][0] = cube[side][5];
+                        cube[side][5] = cube[side][7];
+                        cube[side][7] = cube[side][2];
+                        cube[side][2] = temp;
+
+                        temp = cube[side][1];
+                        cube[side][1] = cube[side][3];
+                        cube[side][3] = cube[side][6];
+                        cube[side][6] = cube[side][4];
+                        cube[side][4] = temp;
+
+                        switch(side){
+                                case 0: //white
+                                        temp = cube[1][0];
+                                        cube[1][0] = cube[2][0];
+                                        cube[2][0] = cube[4][0];
+                                        cube[4][0] = cube[5][0];
+                                        cube[5][0] = temp;
+
+                                        temp = cube[1][1];
+                                        cube[1][1] = cube[2][1];
+                                        cube[2][1] = cube[4][1];
+                                        cube[4][1] = cube[5][1];
+                                        cube[5][1] = temp;
+
+                                        temp = cube[1][2];
+                                        cube[1][2] = cube[2][2];
+                                        cube[2][2] = cube[4][2];
+                                        cube[4][2] = cube[5][2];
+                                        cube[5][2] = temp;
+                                        break;
+                                case 1: //green
+                                        temp = cube[0][0];
+                                        cube[0][0] = cube[5][7];
+                                        cube[5][7] = cube[3][0];
+                                        cube[3][0] = cube[2][0];
+                                        cube[2][0] = temp;
+
+                                        temp = cube[0][3];
+                                        cube[0][3] = cube[5][4];
+                                        cube[5][4] = cube[3][3];
+                                        cube[3][3] = cube[2][3];
+                                        cube[2][3] = temp;
+
+                                        temp = cube[0][5];
+                                        cube[0][5] = cube[5][2];
+                                        cube[5][2] = cube[3][5];
+                                        cube[3][5] = cube[2][5];
+                                        cube[2][5] = temp;
+                                        break;
+                                case 2: //red
+                                        temp = cube[0][5];
+                                        cube[0][5] = cube[1][7];
+                                        cube[1][7] = cube[3][2];
+                                        cube[3][2] = cube[4][0];
+                                        cube[4][0] = temp;
+
+                                        temp = cube[0][6];
+                                        cube[0][6] = cube[1][4];
+                                        cube[1][4] = cube[3][1];
+                                        cube[3][1] = cube[4][3];
+                                        cube[4][3] = temp;
+
+                                        temp = cube[0][7];
+                                        cube[0][7] = cube[1][2];
+                                        cube[1][2] = cube[3][0];
+                                        cube[3][0] = cube[4][5];
+                                        cube[4][5] = temp;
+                                        break;
+                                case 3: //yellow
+                                        temp = cube[2][5];
+                                        cube[2][5] = cube[1][5];
+                                        cube[1][5] = cube[5][5];
+                                        cube[5][5] = cube[4][5];
+                                        cube[4][5] = temp;
+
+                                        temp = cube[2][6];
+                                        cube[2][6] = cube[1][6];
+                                        cube[1][6] = cube[5][6];
+                                        cube[5][6] = cube[4][6];
+                                        cube[4][6] = temp;
+
+                                        temp = cube[2][7];
+                                        cube[2][7] = cube[1][7];
+                                        cube[1][7] = cube[5][7];
+                                        cube[5][7] = cube[4][7];
+                                        cube[4][7] = temp;
+                                        break;
+                                case 4: //blue
+                                        temp = cube[0][7];
+                                        cube[0][7] = cube[2][7];
+                                        cube[2][7] = cube[3][7];
+                                        cube[3][7] = cube[5][0];
+                                        cube[5][0] = temp;
+
+                                        temp = cube[0][4];
+                                        cube[0][4] = cube[2][4];
+                                        cube[2][4] = cube[3][4];
+                                        cube[3][4] = cube[5][3];
+                                        cube[5][3] = temp;
+
+                                        temp = cube[0][2];
+                                        cube[0][2] = cube[2][2];
+                                        cube[2][2] = cube[3][2];
+                                        cube[3][2] = cube[5][5];
+                                        cube[5][5] = temp;
+                                        break;
+                                case 5: //orange
+                                        temp = cube[0][2];
+                                        cube[0][2] = cube[4][7];
+                                        cube[4][7] = cube[3][5];
+                                        cube[3][5] = cube[1][0];
+                                        cube[1][0] = temp;
+
+                                        temp = cube[0][1];
+                                        cube[0][1] = cube[4][4];
+                                        cube[4][4] = cube[3][6];
+                                        cube[3][6] = cube[1][3];
+                                        cube[1][3] = temp;
+
+                                        temp = cube[0][0];
+                                        cube[0][0] = cube[4][2];
+                                        cube[4][2] = cube[3][7];
+                                        cube[3][7] = cube[1][5];
+                                        cube[1][5] = temp;
+                                        break;
+                        }
+                }
+                return 1; //successful call
+        }
+        return 0; //unsuccessful call
+}
+/*
 void whiteCCW(int** cube){
 	//modifies white face pieces
-	int temp;
 	temp = cube[0][0];
 	cube[0][0] = cube[0][2];
 	cube[0][2] = cube[0][7];
@@ -42,7 +310,6 @@ void whiteCCW(int** cube){
 
 void whiteCW(int** cube){
         //modifies white face pieces
-        int temp;
         temp = cube[0][0];
         cube[0][0] = cube[0][5];
         cube[0][5] = cube[0][7];
@@ -77,7 +344,6 @@ void whiteCW(int** cube){
 
 void greenCCW(int** cube){
 	//rotate green face
-	int temp;
         temp = cube[1][0];
         cube[1][0] = cube[1][2];
         cube[1][2] = cube[1][7];
@@ -112,7 +378,6 @@ void greenCCW(int** cube){
 
 void greenCW(int** cube){
         //modifies green face pieces
-        int temp;
         temp = cube[1][0];
         cube[1][0] = cube[1][5];
         cube[1][5] = cube[1][7];
@@ -147,7 +412,6 @@ void greenCW(int** cube){
 
 void redCCW(int** cube){
         //rotate red face
-	int temp;
         temp = cube[2][0];
         cube[2][0] = cube[2][2];
         cube[2][2] = cube[2][7];
@@ -182,7 +446,6 @@ void redCCW(int** cube){
 
 void redCW(int** cube){
         //modifies red face pieces
-        int temp;
         temp = cube[2][0];
         cube[2][0] = cube[2][5];
         cube[2][5] = cube[2][7];
@@ -217,7 +480,6 @@ void redCW(int** cube){
 
 void yellowCCW(int** cube){
         //rotates yellow face
-	int temp;
         temp = cube[3][0];
         cube[3][0] = cube[3][2];
         cube[3][2] = cube[3][7];
@@ -252,7 +514,6 @@ void yellowCCW(int** cube){
 
 void yellowCW(int** cube){
         //modifies yellow face pieces
-        int temp;
         temp = cube[3][0];
         cube[3][0] = cube[3][5];
         cube[3][5] = cube[3][7];
@@ -287,7 +548,6 @@ void yellowCW(int** cube){
 
 void blueCCW(int** cube){
 	//rotates blue face
-	int temp;
         temp = cube[4][0];
         cube[4][0] = cube[4][2];
         cube[4][2] = cube[4][7];
@@ -322,7 +582,6 @@ void blueCCW(int** cube){
 
 void blueCW(int** cube){
         //modifies blue face pieces
-        int temp;
         temp = cube[4][0];
         cube[4][0] = cube[4][5];
         cube[4][5] = cube[4][7];
@@ -357,7 +616,6 @@ void blueCW(int** cube){
 
 void orangeCCW(int** cube){
 	//rotates orange face
-        int temp;
         temp = cube[5][0];
         cube[5][0] = cube[5][2];
         cube[5][2] = cube[5][7];
@@ -392,7 +650,6 @@ void orangeCCW(int** cube){
 
 void orangeCW(int** cube){
         //modifies orange face pieces
-        int temp;
         temp = cube[5][0];
         cube[5][0] = cube[5][5];
         cube[5][5] = cube[5][7];
@@ -423,7 +680,7 @@ void orangeCW(int** cube){
         cube[4][2] = cube[3][7];
         cube[3][7] = cube[1][5];
         cube[1][5] = temp;
-}
+*/
 
 //Show me what the cube looks like
 void displayCube(int** cube){
@@ -453,36 +710,49 @@ void resetCube(int** cube){
 
 //checks if the modifications work as intended.  For debugging purposes
 void testRuns(int** cube){
+
         displayCube(cube);
         
         printf("rotate white face\n");
-        whiteCCW(cube);
-        whiteCW(cube);
+        rotate(cube, 0, 0);
+        rotate(cube, 0, 1);
+        //whiteCCW(cube);
+        //whiteCW(cube);
         displayCube(cube);
 
         printf("rotate green face\n");
-        greenCCW(cube);
-        greenCW(cube);
+        rotate(cube, 1, 0);
+        rotate(cube, 1, 1);
+        //greenCCW(cube);
+        //greenCW(cube);
         displayCube(cube);
 
         printf("rotate red face\n");
-        redCCW(cube);
-        redCW(cube);
+        rotate(cube, 2, 0);
+        rotate(cube, 2, 1);
+        //redCCW(cube);
+        //redCW(cube);
         displayCube(cube);
 
         printf("rotate yellow face\n");
-        yellowCCW(cube);
-        yellowCW(cube);
+        rotate(cube, 3, 0);
+        rotate(cube, 3, 1);
+        //yellowCCW(cube);
+        //yellowCW(cube);
         displayCube(cube);
 
         printf("rotate blue face\n");
-        blueCCW(cube);
-        blueCW(cube);
+        rotate(cube, 4, 0);
+        rotate(cube, 4, 1);
+        //blueCCW(cube);
+        //blueCW(cube);
         displayCube(cube);
 
         printf("rotate orange face\n");
-        orangeCCW(cube);
-        orangeCW(cube);
+        rotate(cube, 5, 0);
+        rotate(cube, 5, 1);
+        //orangeCCW(cube);
+        //orangeCW(cube);
         displayCube(cube);
 }
 
