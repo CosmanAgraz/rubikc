@@ -1,13 +1,14 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<time.h>
 
 //global memory
 int face = 6, facePiece = 8, i, j, count, temp;
 char *empty = "";
 
 //master function
-int rotate(int** cube, int side, int rotation){
-        if (0<=side<=5 && 0<=rotation<=1){
+void rotate(int** cube, int side, int rotation){
+        //if (0<=side<=5 && 0<=rotation<=1){
                 if (rotation==0){
                         //rotates face pieces CCW
                         temp = cube[side][0];
@@ -300,6 +301,12 @@ void resetCube(int** cube){
 	}
 }
 
+void randomizeCube(int** cube){
+        for (i=0; i<23; i++){
+                rotate(cube, (int) rand() % 2, (int) rand() % 6);
+        }
+}
+
 //checks if the modifications work as intended.  For debugging purposes
 void testRuns(int** cube){
 
@@ -343,12 +350,21 @@ int main(int argc, char* argv[]){
         int *cube[face]; //[6]
         for (i=0; i<face; i++) //0 .. 5
                 cube[i] = (int *)malloc(facePiece * sizeof(int));
+        printf("Memory allocation OK..\n");
 
         //assigns values which are stored in the memory prev allocated.
         resetCube(cube);
+        printf("Memory assignment OK..\n");
 	
-        testRuns(cube);
-                
+        //testRuns(cube);
+        //printf("Test runs DONE.\n");
+
+        randomizeCube(cube);
+        printf("Cube READY.\n")
+
+        printf("Instructions:\n");
+        printf("You are running a function with two (2) parameters");
+        
 	//printf("suh dude \n");
 	//Dealocating memory to avoid memory leaks
 	for (int i=0; i < face; i++){
